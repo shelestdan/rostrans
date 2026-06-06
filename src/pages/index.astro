@@ -1,0 +1,428 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { company, mapUrl, siteUrl } from "../lib/site";
+
+const title = "РУТРАНС - перевозка спецтехники, оборудования и негабаритных грузов по России";
+const description =
+  "ООО «РУТРАНС» перевозит спецтехнику, оборудование, контейнеры, металлоконструкции и коммерческие грузы по РФ. Расчет за 15 минут, до 100 тонн, НДС.";
+const withBase = (path: string) => `${import.meta.env.BASE_URL}${path.replace(/^\//, "")}`;
+const leadAction = withBase("/lead.php");
+const privacyUrl = withBase("/privacy/");
+
+const nav = [
+  ["Возможности", "#capabilities"],
+  ["Парк", "#fleet"],
+  ["Процесс", "#process"],
+  ["Заявка", "#request"]
+];
+
+const heroStats = [
+  ["до 100 тонн", "грузоподъемность"],
+  ["30 машин", "свой и привлеченный парк"],
+  ["15 минут", "средний срок расчета"],
+  ["вся РФ", "география перевозок"]
+];
+
+const cargoTypes = [
+  "спецтехника",
+  "горнодобывающее и золотодобывающее оборудование",
+  "запчасти и металлоконструкции",
+  "вагон-дома и контейнеры",
+  "сэндвич-панели и стройматериалы",
+  "продукты и коммерческие грузы"
+];
+
+const fleet = [
+  ["Тралы", "Для спецтехники, тяжелого оборудования и негабарита."],
+  ["Тенты", "Для закрытой перевозки грузов, которым нужна защита от погоды."],
+  ["Бортовые машины", "Для строительных материалов, металлоконструкций и паллет."],
+  ["Площадки без бортов", "Для крупногабаритных грузов и нестандартной погрузки."],
+  ["Рефрижераторы", "Для грузов с температурными требованиями."]
+];
+
+const process = [
+  ["01", "Заявка", "Клиент передает телефон, имя, маршрут, вес и габариты груза."],
+  ["02", "Уточнение", "Менеджер проверяет детали, способ связи и условия погрузки."],
+  ["03", "Расчет", "Стоимость зависит от маршрута, габаритов, веса и сложности задачи."],
+  ["04", "Машина", "Согласуем дату, тип транспорта, погрузку, разгрузку и экспедирование."],
+  ["05", "Доставка", "Везем груз, сопровождаем задачу и держим связь по маршруту."],
+  ["06", "Документы", "Договор, счет, УПД, ТТН, страхование груза и закрывающие документы."]
+];
+
+const gallery = [
+  {
+    src: withBase("/assets/rutrans-loader-black-truck.jpg"),
+    alt: "Перевозка крупного погрузчика на низкорамном трале",
+    title: "Спецтехника на трале"
+  },
+  {
+    src: withBase("/assets/rutrans-excavator-tral-winter.jpg"),
+    alt: "Экскаватор LiuGong на трале зимой",
+    title: "Экскаваторы и техника"
+  },
+  {
+    src: withBase("/assets/rutrans-module-winter.jpg"),
+    alt: "Перевозка вагон-дома и модульного груза зимой",
+    title: "Вагон-дома и модули"
+  },
+  {
+    src: withBase("/assets/rutrans-night-loader-crane.jpg"),
+    alt: "Ночная погрузка тяжелой техники с краном",
+    title: "Сложная погрузка"
+  },
+  {
+    src: withBase("/assets/rutrans-forklifts-inside-truck.jpg"),
+    alt: "Погрузчики закреплены внутри тентованного транспорта",
+    title: "Тентованные перевозки"
+  },
+  {
+    src: withBase("/assets/rutrans-tank-tral.jpg"),
+    alt: "Перевозка крупной промышленной емкости на трале",
+    title: "Промышленное оборудование"
+  }
+];
+
+const details = [
+  ["Полное наименование", company.fullName],
+  ["ИНН / ОГРН / КПП", `${company.inn} / ${company.ogrn} / ${company.kpp}`],
+  ["Адрес", company.address],
+  ["Директор", company.director],
+  ["Телефон", company.phonePretty],
+  ["Доп. телефон", company.secondPhonePretty],
+  ["Email", company.email],
+  ["Доп. email", company.secondEmail],
+  ["Часы звонков", company.workingHours]
+];
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  name: company.shortName,
+  legalName: company.fullName,
+  taxID: company.inn,
+  identifier: [{ "@type": "PropertyValue", name: "ОГРН", value: company.ogrn }],
+  url: siteUrl,
+  email: company.email,
+  telephone: [company.phoneRaw, company.secondPhoneRaw],
+  address: {
+    "@type": "PostalAddress",
+    postalCode: "660077",
+    addressRegion: "Красноярский край",
+    addressLocality: "Красноярск",
+    streetAddress: "ул. Батурина, д. 36А, помещ. 25, офис 52-4Б"
+  },
+  areaServed: "Российская Федерация",
+  description,
+  makesOffer: cargoTypes.map((name) => ({
+    "@type": "Offer",
+    itemOffered: {
+      "@type": "Service",
+      name: `Перевозка: ${name}`
+    }
+  }))
+};
+---
+
+<BaseLayout title={title} description={description} siteUrl={siteUrl}>
+  <a class="skip-link" href="#main">К содержанию</a>
+
+  <header class="nav">
+    <div class="site-shell nav-inner">
+      <a class="brand" href={withBase("/")} aria-label="РУТРАНС">
+        <img class="brand-mark" src={withBase("/assets/rutrans-logo-cropped.jpg")} alt="РУТРАНС" width="280" height="201" />
+      </a>
+      <nav class="nav-links" aria-label="Основная навигация">
+        {nav.map(([label, href]) => (
+          <a href={href}>{label}</a>
+        ))}
+      </nav>
+      <a class="nav-cta" href={`tel:${company.phoneRaw}`}>{company.phonePretty}</a>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <div class="hero-media" aria-hidden="true">
+        <img src={withBase("/assets/rutrans-grader-tral.jpg")} alt="" width="1280" height="720" loading="eager" decoding="async" />
+      </div>
+      <div class="site-shell hero-content">
+        <div class="hero-copy">
+          <p class="eyebrow">Транспортная компания / вся территория РФ</p>
+          <h1>Надежность в каждом километре</h1>
+          <p class="lead">
+            РУТРАНС превращает хаос логистических цепочек в предсказуемый процесс: перевозим спецтехнику, оборудование,
+            контейнеры, металлоконструкции и коммерческие грузы от 100 кг до 100 тонн.
+          </p>
+          <div class="hero-actions" aria-label="Быстрые действия">
+            <a class="btn btn-primary" href="#request">Рассчитать перевозку</a>
+            <a class="btn btn-secondary" href={`tel:${company.phoneRaw}`}>Позвонить</a>
+          </div>
+        </div>
+
+        <dl class="hero-stats" aria-label="Ключевые показатели">
+          {heroStats.map(([value, label]) => (
+            <div>
+              <dt>{value}</dt>
+              <dd>{label}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </section>
+
+    <section class="fact-band" aria-label="Контактные данные">
+      <div class="site-shell fact-grid">
+        <div>
+          <span>Ответ на заявку</span>
+          <strong>{company.responseTime}</strong>
+        </div>
+        <div>
+          <span>Связь</span>
+          <strong>звонок / email / WhatsApp / Max / Telegram</strong>
+        </div>
+        <div>
+          <span>Работа с юрлицами</span>
+          <strong>договор, НДС, УПД, ТТН</strong>
+        </div>
+      </div>
+    </section>
+
+    <section class="site-shell section capabilities-section" id="capabilities">
+      <div class="section-kicker">
+        <p class="eyebrow">Что возим</p>
+        <h2>Любая сложность, кроме мелких отправок до 100 кг</h2>
+      </div>
+      <div class="cargo-grid">
+        {cargoTypes.map((item) => (
+          <article class="cargo-card">
+            <h3>{item}</h3>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="split-section">
+      <div class="site-shell split-grid">
+        <div class="split-copy">
+          <p class="eyebrow">Польза</p>
+          <h2>Ваш груз, наша ответственность</h2>
+          <p>
+            Задачи решает менеджер: уточняет параметры, подбирает транспорт, считает маршрут и держит связь.
+            При сложной заявке подключаем индивидуальную работу, погрузку, разгрузку и экспедирование.
+          </p>
+          <ul class="check-list">
+            <li>расчет обычно за 15 минут</li>
+            <li>возможна работа 24 часа в сутки по задаче</li>
+            <li>страхование груза</li>
+            <li>свой и привлеченный транспортный парк</li>
+          </ul>
+        </div>
+        <img
+          class="split-image"
+          src={withBase("/assets/rutrans-two-backhoe-loaders.jpg")}
+          alt="Два экскаватора-погрузчика на низкорамной платформе"
+          width="1280"
+          height="960"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+    </section>
+
+    <section class="site-shell section fleet-section" id="fleet">
+      <div class="section-head">
+        <p class="eyebrow">Транспорт</p>
+        <h2>Парк под разные типы груза</h2>
+      </div>
+      <div class="fleet-grid">
+        {fleet.map(([name, text]) => (
+          <article class="fleet-card">
+            <h3>{name}</h3>
+            <p>{text}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="gallery-section" aria-labelledby="gallery-title">
+      <div class="site-shell section-head">
+        <p class="eyebrow">Кейсы</p>
+        <h2 id="gallery-title">Реальные перевозки РУТРАНС</h2>
+      </div>
+      <div class="gallery-grid">
+        {gallery.map((item) => (
+          <figure>
+            <img src={item.src} alt={item.alt} width="1280" height="900" loading="lazy" decoding="async" />
+            <figcaption>{item.title}</figcaption>
+          </figure>
+        ))}
+      </div>
+    </section>
+
+    <section class="site-shell section process-section" id="process">
+      <div class="section-head">
+        <p class="eyebrow">Процесс</p>
+        <h2>От заявки до документов</h2>
+      </div>
+      <div class="process-grid">
+        {process.map(([step, title, text]) => (
+          <article class="process-card">
+            <span>{step}</span>
+            <h3>{title}</h3>
+            <p>{text}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="site-shell section request-section" id="request">
+      <div class="form-card">
+        <p class="eyebrow">Заявка</p>
+        <h2>Получить расчет перевозки</h2>
+        <p>
+          Для точного расчета укажите телефон, имя, маршрут, габариты и вес груза. Пример: г. Москва - г. Красноярск,
+          оборудование, 12 тонн, нужна погрузка.
+        </p>
+        <form class="lead-form" action={leadAction} method="post" novalidate>
+          <div class="field">
+            <label for="name">Имя</label>
+            <input id="name" name="name" autocomplete="name" required minlength="2" maxlength="80" />
+          </div>
+          <div class="field">
+            <label for="phone">Телефон</label>
+            <input id="phone" name="phone" autocomplete="tel" inputmode="tel" required minlength="6" maxlength="30" />
+          </div>
+          <div class="field">
+            <label for="company">Компания</label>
+            <input id="company" name="company" autocomplete="organization" maxlength="120" />
+          </div>
+          <div class="field">
+            <label for="cargo">Маршрут, габариты и вес</label>
+            <textarea id="cargo" name="cargo" required minlength="5" maxlength="1000"></textarea>
+          </div>
+          <label class="consent">
+            <input name="consent" value="yes" type="checkbox" required />
+            <span>Согласен на обработку данных из формы для ответа на заявку. <a href={privacyUrl}>Политика</a></span>
+          </label>
+          <div class="hidden-field" aria-hidden="true">
+            <label for="website">Сайт</label>
+            <input id="website" name="website" tabindex="-1" autocomplete="off" />
+          </div>
+          <button class="btn btn-primary" type="submit">Отправить заявку</button>
+          <p class="form-status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+
+      <aside class="details-card" id="details" aria-label="Реквизиты компании">
+        <div class="details-head">
+          <p class="eyebrow">Контакты и реквизиты</p>
+          <h2>Связаться с РУТРАНС</h2>
+        </div>
+        {details.map(([label, value]) => (
+          <div class="detail-block">
+            <span>{label}</span>
+            {label === "Телефон" ? (
+              <a href={`tel:${company.phoneRaw}`}>{value}</a>
+            ) : label === "Доп. телефон" ? (
+              <a href={`tel:${company.secondPhoneRaw}`}>{value}</a>
+            ) : label === "Email" ? (
+              <a href={`mailto:${company.email}`}>{value}</a>
+            ) : label === "Доп. email" ? (
+              <a href={`mailto:${company.secondEmail}`}>{value}</a>
+            ) : (
+              <strong>{value}</strong>
+            )}
+          </div>
+        ))}
+        <a class="map-link" href={mapUrl} target="_blank" rel="noreferrer">Открыть точку на Яндекс.Картах</a>
+      </aside>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="site-shell footer-inner">
+      <p>{company.shortName}. ИНН {company.inn}. ОГРН {company.ogrn}.</p>
+      <div>
+        <a href={`tel:${company.phoneRaw}`}>{company.phonePretty}</a>
+        <a href={`tel:${company.secondPhoneRaw}`}>{company.secondPhonePretty}</a>
+        <a href={`mailto:${company.email}`}>{company.email}</a>
+      </div>
+    </div>
+  </footer>
+
+  <div class="mobile-bar" aria-label="Быстрые контакты">
+    <a href={`tel:${company.phoneRaw}`}>Позвонить</a>
+    <a href="#request">Заявка</a>
+  </div>
+
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(schema)} />
+  <script>
+    const form = document.querySelector(".lead-form");
+    const status = document.querySelector(".form-status");
+    const mobileBar = document.querySelector(".mobile-bar");
+    const hero = document.querySelector(".hero");
+
+    if (mobileBar instanceof HTMLElement && hero instanceof HTMLElement) {
+      const syncMobileBar = () => {
+        mobileBar.dataset.visible = window.scrollY > hero.offsetHeight - 120 ? "true" : "false";
+      };
+
+      syncMobileBar();
+      window.addEventListener("scroll", syncMobileBar, { passive: true });
+      window.addEventListener("resize", syncMobileBar);
+    }
+
+    if (form instanceof HTMLFormElement && status instanceof HTMLElement) {
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        const submitButton = form.querySelector('button[type="submit"]');
+        if (!(submitButton instanceof HTMLButtonElement)) return;
+
+        status.textContent = "";
+        status.removeAttribute("data-state");
+
+        if (!form.reportValidity()) {
+          status.textContent = "Проверьте обязательные поля и согласие.";
+          status.setAttribute("data-state", "error");
+          return;
+        }
+
+        if (location.hostname.endsWith("github.io")) {
+          status.textContent = "Демо на GitHub Pages: форма не отправляет заявку. Для связи используйте телефон или почту.";
+          status.setAttribute("data-state", "error");
+          return;
+        }
+
+        submitButton.disabled = true;
+        submitButton.textContent = "Отправляем";
+
+        try {
+          const response = await fetch(form.action, {
+            method: "POST",
+            body: new FormData(form),
+            headers: {
+              Accept: "application/json"
+            }
+          });
+
+          const data = await response.json().catch(() => ({}));
+
+          if (!response.ok || data.ok !== true) {
+            throw new Error(data.message || "request_failed");
+          }
+
+          form.reset();
+          status.textContent = "Заявка отправлена. Менеджер ответит обычно в течение 15 минут.";
+          status.setAttribute("data-state", "success");
+        } catch {
+          status.textContent = "Не удалось отправить заявку. Позвоните или отправьте письмо на почту.";
+          status.setAttribute("data-state", "error");
+        } finally {
+          submitButton.disabled = false;
+          submitButton.textContent = "Отправить заявку";
+        }
+      });
+    }
+  </script>
+</BaseLayout>
