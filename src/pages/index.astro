@@ -23,6 +23,8 @@ const heroStats = [
   ["вся РФ", "география перевозок"]
 ];
 
+const audienceTabs = ["Бизнесу", "Производителям", "Строителям", "Импортерам", "Горнодобыче"];
+
 const cargoTypes = [
   "спецтехника",
   "горнодобывающее и золотодобывающее оборудование",
@@ -30,6 +32,15 @@ const cargoTypes = [
   "вагон-дома и контейнеры",
   "сэндвич-панели и стройматериалы",
   "продукты и коммерческие грузы"
+];
+
+const serviceCards = [
+  ["Перевезти спецтехнику", "Тралы до 100 тонн, подбор машины под вес, габариты и маршрут."],
+  ["Отправить оборудование", "Станки, промышленное оборудование, емкости, узлы и агрегаты."],
+  ["Доставить контейнеры и модули", "Вагон-дома, контейнеры, бытовки, сэндвич-панели и стройматериалы."],
+  ["Организовать сложную погрузку", "Погрузка, разгрузка, экспедирование и координация на месте."],
+  ["Закрыть документы", "Договор, счет, УПД, ТТН, страхование груза, работа с НДС."],
+  ["Получить быстрый расчет", "Менеджер отвечает обычно за 15 минут, если есть маршрут, вес и габариты."]
 ];
 
 const fleet = [
@@ -142,62 +153,82 @@ const schema = {
 
   <main id="main">
     <section class="hero">
-      <div class="hero-media" aria-hidden="true">
-        <img src={withBase("/assets/rutrans-grader-tral.jpg")} alt="" width="1280" height="720" loading="eager" decoding="async" />
-      </div>
       <div class="site-shell hero-content">
         <div class="hero-copy">
-          <p class="eyebrow">Транспортная компания / вся территория РФ</p>
-          <h1>Надежность в каждом километре</h1>
+          <p class="eyebrow">Перевозки по РФ / от 100 кг до 100 тонн</p>
+          <h1>Рассчитать перевозку груза</h1>
           <p class="lead">
-            РУТРАНС превращает хаос логистических цепочек в предсказуемый процесс: перевозим спецтехнику, оборудование,
-            контейнеры, металлоконструкции и коммерческие грузы от 100 кг до 100 тонн.
+            Спецтехника, оборудование, контейнеры, металлоконструкции и коммерческие грузы. Ответ менеджера обычно за
+            15 минут.
           </p>
-          <div class="hero-actions" aria-label="Быстрые действия">
-            <a class="btn btn-primary" href="#request">Рассчитать перевозку</a>
-            <a class="btn btn-secondary" href={`tel:${company.phoneRaw}`}>Позвонить</a>
+        </div>
+
+        <div class="hero-panel">
+          <div>
+            <p class="eyebrow">Быстрый расчет</p>
+            <h2>Маршрут и груз</h2>
           </div>
-        </div>
-
-        <dl class="hero-stats" aria-label="Ключевые показатели">
-          {heroStats.map(([value, label]) => (
-            <div>
-              <dt>{value}</dt>
-              <dd>{label}</dd>
+          <form class="lead-form quick-form" action={leadAction} method="post" novalidate>
+            <input type="hidden" name="name" value="Быстрый расчет" />
+            <div class="quick-field">
+              <label for="quick-cargo">Маршрут, груз, вес</label>
+              <input
+                id="quick-cargo"
+                name="cargo"
+                required
+                minlength="5"
+                maxlength="1000"
+                placeholder="Москва - Красноярск, экскаватор, 18 т"
+              />
             </div>
+            <div class="quick-field">
+              <label for="quick-phone">Телефон</label>
+              <input id="quick-phone" name="phone" autocomplete="tel" inputmode="tel" required minlength="6" maxlength="30" />
+            </div>
+            <label class="consent quick-consent">
+              <input name="consent" value="yes" type="checkbox" required />
+              <span>Согласен на обработку данных. <a href={privacyUrl}>Политика</a></span>
+            </label>
+            <div class="hidden-field" aria-hidden="true">
+              <label for="quick-website">Сайт</label>
+              <input id="quick-website" name="website" tabindex="-1" autocomplete="off" />
+            </div>
+            <button class="btn btn-primary" type="submit">Рассчитать</button>
+            <p class="form-status" role="status" aria-live="polite"></p>
+          </form>
+          <dl class="quick-meta" aria-label="Ключевые показатели">
+            {heroStats.map(([value, label]) => (
+              <div>
+                <dt>{value}</dt>
+                <dd>{label}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <section class="service-hub" id="capabilities">
+      <div class="site-shell service-hub-inner">
+        <div class="audience-tabs" aria-label="Типы клиентов">
+          {audienceTabs.map((tab, index) => (
+            <span class:list={["audience-tab", { "is-active": index === 0 }]}>{tab}</span>
           ))}
-        </dl>
-      </div>
-    </section>
-
-    <section class="fact-band" aria-label="Контактные данные">
-      <div class="site-shell fact-grid">
-        <div>
-          <span>Ответ на заявку</span>
-          <strong>{company.responseTime}</strong>
         </div>
-        <div>
-          <span>Связь</span>
-          <strong>звонок / email / WhatsApp / Max / Telegram</strong>
+        <div class="section-head">
+          <p class="eyebrow">Услуги</p>
+          <h2>Конкретные задачи, которые закрывает РУТРАНС</h2>
+          <p>Минимум текста, максимум сути: что везем, как помогаем, какие документы закрываем.</p>
         </div>
-        <div>
-          <span>Работа с юрлицами</span>
-          <strong>договор, НДС, УПД, ТТН</strong>
+        <div class="service-card-grid">
+          {serviceCards.map(([name, text]) => (
+            <article class="service-card">
+              <span aria-hidden="true"></span>
+              <h3>{name}</h3>
+              <p>{text}</p>
+            </article>
+          ))}
         </div>
-      </div>
-    </section>
-
-    <section class="site-shell section capabilities-section" id="capabilities">
-      <div class="section-kicker">
-        <p class="eyebrow">Что возим</p>
-        <h2>Любая сложность, кроме мелких отправок до 100 кг</h2>
-      </div>
-      <div class="cargo-grid">
-        {cargoTypes.map((item) => (
-          <article class="cargo-card">
-            <h3>{item}</h3>
-          </article>
-        ))}
       </div>
     </section>
 
@@ -357,8 +388,7 @@ const schema = {
 
   <script type="application/ld+json" is:inline set:html={JSON.stringify(schema)} />
   <script>
-    const form = document.querySelector(".lead-form");
-    const status = document.querySelector(".form-status");
+    const forms = document.querySelectorAll(".lead-form");
     const mobileBar = document.querySelector(".mobile-bar");
     const hero = document.querySelector(".hero");
 
@@ -372,12 +402,16 @@ const schema = {
       window.addEventListener("resize", syncMobileBar);
     }
 
-    if (form instanceof HTMLFormElement && status instanceof HTMLElement) {
+    forms.forEach((form) => {
+      const status = form.querySelector(".form-status");
+      if (!(form instanceof HTMLFormElement) || !(status instanceof HTMLElement)) return;
+
       form.addEventListener("submit", async (event) => {
         event.preventDefault();
 
         const submitButton = form.querySelector('button[type="submit"]');
         if (!(submitButton instanceof HTMLButtonElement)) return;
+        const submitText = submitButton.textContent || "Отправить заявку";
 
         status.textContent = "";
         status.removeAttribute("data-state");
@@ -420,9 +454,9 @@ const schema = {
           status.setAttribute("data-state", "error");
         } finally {
           submitButton.disabled = false;
-          submitButton.textContent = "Отправить заявку";
+          submitButton.textContent = submitText;
         }
       });
-    }
+    });
   </script>
 </BaseLayout>
