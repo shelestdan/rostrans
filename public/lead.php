@@ -93,21 +93,27 @@ if (value('website', 200) !== '') {
 }
 
 $name = value('name', 80);
-$phone = value('phone', 30);
+$phone = value('phone', 120);
 $company = value('company', 120);
 $cargo = value('cargo', 1000);
+$route = value('route', 180);
+$cargoDetails = value('cargo_details', 500);
 $consent = value('consent', 10);
 
+if ($cargo === '' && ($route !== '' || $cargoDetails !== '')) {
+    $cargo = trim("Маршрут: {$route}\nГруз: {$cargoDetails}");
+}
+
 if (mb_strlen($name, 'UTF-8') < 2 || mb_strlen($phone, 'UTF-8') < 6 || mb_strlen($cargo, 'UTF-8') < 5) {
-    respond(422, ['ok' => false, 'message' => 'Заполните имя, телефон и описание заявки']);
+    respond(422, ['ok' => false, 'message' => 'Заполните имя, контакт и описание заявки']);
 }
 
 if ($consent !== 'yes') {
     respond(422, ['ok' => false, 'message' => 'Подтвердите согласие на обработку данных']);
 }
 
-if (!preg_match('/^[0-9+()\-\s]{6,30}$/', $phone)) {
-    respond(422, ['ok' => false, 'message' => 'Проверьте телефон']);
+if (preg_match('/[\r\n<>{}]/u', $phone)) {
+    respond(422, ['ok' => false, 'message' => 'Проверьте контакт']);
 }
 
 $ip = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
@@ -144,7 +150,7 @@ $safeCargo = nl2br(htmlspecialchars($cargo, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8'
 $html = <<<HTML
 <h2>Заявка с сайта РУТРАНС</h2>
 <p><strong>Имя:</strong> {$safeName}</p>
-<p><strong>Телефон:</strong> {$safePhone}</p>
+<p><strong>Контакт:</strong> {$safePhone}</p>
 <p><strong>Компания:</strong> {$safeCompany}</p>
 <p><strong>Маршрут и груз:</strong><br>{$safeCargo}</p>
 HTML;

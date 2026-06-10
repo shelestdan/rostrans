@@ -10,20 +10,18 @@ const leadAction = withBase("/lead.php");
 const privacyUrl = withBase("/privacy/");
 
 const nav = [
-  ["Возможности", "#capabilities"],
+  ["Услуги", "#capabilities"],
   ["Парк", "#fleet"],
   ["Процесс", "#process"],
   ["Заявка", "#request"]
 ];
 
 const heroStats = [
-  ["до 100 тонн", "грузоподъемность"],
-  ["30 машин", "свой и привлеченный парк"],
-  ["15 минут", "средний срок расчета"],
-  ["вся РФ", "география перевозок"]
+  ["До 100 тонн", "грузоподъемность собственной техники"],
+  ["Более 30 единиц", "собственной техники"],
+  ["15 минут", "среднее время расчета"],
+  ["Вся территория РФ", "география перевозок"]
 ];
-
-const audienceTabs = ["Бизнесу", "Производителям", "Строителям", "Импортерам", "Горнодобыче"];
 
 const cargoTypes = [
   "спецтехника",
@@ -35,12 +33,30 @@ const cargoTypes = [
 ];
 
 const serviceCards = [
-  ["Перевезти спецтехнику", "Тралы до 100 тонн, подбор машины под вес, габариты и маршрут."],
-  ["Отправить оборудование", "Станки, промышленное оборудование, емкости, узлы и агрегаты."],
-  ["Доставить контейнеры и модули", "Вагон-дома, контейнеры, бытовки, сэндвич-панели и стройматериалы."],
-  ["Организовать сложную погрузку", "Погрузка, разгрузка, экспедирование и координация на месте."],
-  ["Закрыть документы", "Договор, счет, УПД, ТТН, страхование груза, работа с НДС."],
-  ["Получить быстрый расчет", "Менеджер отвечает обычно за 15 минут, если есть маршрут, вес и габариты."]
+  [
+    "Предоставление спецтехники в любом регионе РФ",
+    "Экскаваторы, автокраны, манипуляторы, бульдозеры, погрузчики и другая спецтехника."
+  ],
+  [
+    "Доставка грузов в труднодоступные регионы и на месторождения",
+    "Работаем по сложным направлениям: Таксимо, Бодайбо, Ленск, Якутск, Магадан и другие удаленные регионы."
+  ],
+  [
+    "Организация мультимодальных перевозок",
+    "Перевозим грузы несколькими видами транспорта: авто, ж/д, морским и авиа - по единому договору."
+  ],
+  [
+    "Перевозка спецтехники и тяжелых грузов до 100 тонн",
+    "Подбираем транспортное средство под ваш запрос в любом регионе РФ."
+  ],
+  [
+    "Доставка сборных грузов от 400 кг",
+    "Перевозка тентованными и бортовыми полуприцепами по всей территории РФ."
+  ],
+  [
+    "Предоставление полного пакета документов по каждой перевозке",
+    "Закрывающие документы, договоры и сопроводительная документация по каждой заявке."
+  ]
 ];
 
 const fleet = [
@@ -147,7 +163,10 @@ const schema = {
           <a href={href}>{label}</a>
         ))}
       </nav>
-      <a class="nav-cta" href={`tel:${company.phoneRaw}`}>{company.phonePretty}</a>
+      <div class="nav-actions">
+        <a class="nav-cta" href={`tel:${company.phoneRaw}`}>{company.phonePretty}</a>
+        <a class="nav-telegram" href="#request">Telegram</a>
+      </div>
     </div>
   </header>
 
@@ -155,35 +174,61 @@ const schema = {
     <section class="hero">
       <div class="site-shell hero-content">
         <div class="hero-copy">
-          <p class="eyebrow">Перевозки по РФ / от 100 кг до 100 тонн</p>
-          <h1>Рассчитать перевозку груза</h1>
-          <p class="lead">
-            Спецтехника, оборудование, контейнеры, металлоконструкции и коммерческие грузы. Ответ менеджера обычно за
-            15 минут.
-          </p>
+          <p class="eyebrow">ООО «РУТРАНС»</p>
+          <h1>РУТРАНС</h1>
+          <p class="hero-subtitle">Транспортная компания, на которую можно положиться</p>
+          <p class="lead hero-offer">Получите расчёт стоимости перевозки груза за 15 минут</p>
+          <img
+            class="hero-mark"
+            src={withBase("/assets/rutrans-mark.svg")}
+            alt=""
+            width="850"
+            height="850"
+            loading="eager"
+            decoding="async"
+          />
         </div>
 
         <div class="hero-panel">
           <div>
-            <p class="eyebrow">Быстрый расчет</p>
-            <h2>Маршрут и груз</h2>
+            <p class="eyebrow">Заявка</p>
+            <h2>Быстрый расчёт стоимости</h2>
           </div>
           <form class="lead-form quick-form" action={leadAction} method="post" novalidate>
             <input type="hidden" name="name" value="Быстрый расчет" />
             <div class="quick-field">
-              <label for="quick-cargo">Маршрут, груз, вес</label>
+              <label for="quick-route">Маршрут</label>
               <input
-                id="quick-cargo"
-                name="cargo"
+                id="quick-route"
+                name="route"
                 required
-                minlength="5"
-                maxlength="1000"
-                placeholder="Москва - Красноярск, экскаватор, 18 т"
+                minlength="3"
+                maxlength="180"
+                placeholder="Москва - Красноярск"
               />
             </div>
             <div class="quick-field">
-              <label for="quick-phone">Телефон</label>
-              <input id="quick-phone" name="phone" autocomplete="tel" inputmode="tel" required minlength="6" maxlength="30" />
+              <label for="quick-cargo">Характер груза, габариты, вес</label>
+              <input
+                id="quick-cargo"
+                name="cargo_details"
+                required
+                minlength="5"
+                maxlength="500"
+                placeholder="Погрузчик, 17 тонн, ДхШхВ: 8х3х3,5 м"
+              />
+            </div>
+            <div class="quick-field">
+              <label for="quick-phone">Имя, телефон или эл. почта</label>
+              <input
+                id="quick-phone"
+                name="phone"
+                autocomplete="tel"
+                required
+                minlength="6"
+                maxlength="120"
+                placeholder="Иван, +7 999 000 99 99"
+              />
             </div>
             <label class="consent quick-consent">
               <input name="consent" value="yes" type="checkbox" required />
@@ -210,20 +255,15 @@ const schema = {
 
     <section class="service-hub" id="capabilities">
       <div class="site-shell service-hub-inner">
-        <div class="audience-tabs" aria-label="Типы клиентов">
-          {audienceTabs.map((tab, index) => (
-            <span class:list={["audience-tab", { "is-active": index === 0 }]}>{tab}</span>
-          ))}
-        </div>
         <div class="section-head">
           <p class="eyebrow">Услуги</p>
-          <h2>Конкретные задачи, которые закрывает РУТРАНС</h2>
-          <p>Минимум текста, максимум сути: что везем, как помогаем, какие документы закрываем.</p>
+          <h2>Услуги, которые предоставляет ООО «РУТРАНС»</h2>
+          <p>Собираем перевозку под задачу: техника, груз, маршрут, документы и контроль сроков.</p>
         </div>
         <div class="service-card-grid">
           {serviceCards.map(([name, text]) => (
             <article class="service-card">
-              <span aria-hidden="true"></span>
+              <span class="service-check" aria-hidden="true"></span>
               <h3>{name}</h3>
               <p>{text}</p>
             </article>
