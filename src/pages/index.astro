@@ -156,7 +156,8 @@ const schema = {
   <header class="nav">
     <div class="site-shell nav-inner">
       <a class="brand" href={withBase("/")} aria-label="РУТРАНС">
-        <img class="brand-mark" src={withBase("/assets/rutrans-logo-cropped.jpg")} alt="РУТРАНС" width="280" height="201" />
+        <img class="brand-mark" src={withBase("/assets/rutrans-symbol.svg")} alt="" width="230" height="150" />
+        <span>РУТРАНС</span>
       </a>
       <nav class="nav-links" aria-label="Основная навигация">
         {nav.map(([label, href]) => (
@@ -174,16 +175,18 @@ const schema = {
     <section class="hero">
       <div class="site-shell hero-content">
         <div class="hero-copy">
-          <p class="eyebrow">ООО «РУТРАНС»</p>
-          <h1>РУТРАНС</h1>
-          <p class="hero-subtitle">Транспортная компания, на которую можно положиться</p>
-          <p class="lead hero-offer">Получите расчёт стоимости перевозки груза за 15 минут</p>
+          <div class="hero-text">
+            <p class="eyebrow">ООО «РУТРАНС»</p>
+            <h1>РУТРАНС</h1>
+            <p class="hero-subtitle">Транспортная компания, на которую можно положиться</p>
+            <p class="lead hero-offer">Получите расчёт стоимости перевозки груза за 15 минут</p>
+          </div>
           <img
             class="hero-mark"
-            src={withBase("/assets/rutrans-mark.svg")}
+            src={withBase("/assets/rutrans-symbol.svg")}
             alt=""
-            width="850"
-            height="850"
+            width="230"
+            height="150"
             loading="eager"
             decoding="async"
           />
