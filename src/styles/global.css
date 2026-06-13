@@ -227,11 +227,17 @@ textarea {
 
 .eyebrow {
   margin: 0 0 12px;
-  color: var(--accent-warm);
+  color: var(--accent-strong);
   font-size: 12px;
   font-weight: 900;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+}
+
+.hero .eyebrow,
+.split-section .eyebrow,
+.details-head .eyebrow {
+  color: var(--accent-warm);
 }
 
 h1,
@@ -633,7 +639,7 @@ h3 {
   bottom: 5px;
   width: 17px;
   height: 2px;
-  background: var(--accent-warm);
+  background: var(--accent-strong);
   content: "";
 }
 
@@ -799,6 +805,10 @@ h3 {
   line-height: 1.58;
 }
 
+.form-card > .eyebrow {
+  color: var(--accent-strong);
+}
+
 .gallery-section {
   padding: clamp(58px, 8vw, 104px) 0;
   background: #f1f1ee;
@@ -849,7 +859,7 @@ h3 {
 .process-card span {
   display: inline-flex;
   margin-bottom: 34px;
-  color: var(--accent);
+  color: var(--accent-strong);
   font-size: 13px;
   font-weight: 950;
 }
