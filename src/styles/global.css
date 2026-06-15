@@ -10,10 +10,10 @@
   --line: #d8d6ce;
   --dark: #070707;
   --dark-soft: #171717;
-  --accent: #eae0b9;
+  --accent: #fff799;
   --accent-strong: #695b33;
-  --accent-warm: #eae0b9;
-  --accent-hover: #fff7d7;
+  --accent-warm: #fff799;
+  --accent-hover: #fffde7;
   --accent-on: #151515;
   --success: #1f6a3a;
   --danger: #a42b1f;
@@ -111,7 +111,7 @@ textarea {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  color: var(--accent);
+  color: #fff;
   font-size: 18px;
   font-weight: 950;
   letter-spacing: 0.08em;
@@ -398,9 +398,11 @@ h3 {
 
 .hero h1 {
   max-width: 760px;
-  margin-bottom: 8px;
-  font-size: clamp(3.5rem, 7vw, 7.2rem);
-  line-height: 0.82;
+  margin-bottom: 14px;
+  font-size: clamp(3.2rem, 6.6vw, 6.7rem);
+  font-weight: 950;
+  line-height: 0.9;
+  letter-spacing: 0.02em;
   text-transform: uppercase;
 }
 
