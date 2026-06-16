@@ -391,7 +391,7 @@ h3 {
   max-width: none;
   object-fit: cover;
   object-position: center;
-  filter: brightness(0.48) saturate(0.9) contrast(1.05);
+  filter: brightness(0.42) saturate(0.9) contrast(1.05);
 }
 
 .hero-content {
