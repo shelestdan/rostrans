@@ -8,6 +8,7 @@ const description =
 const withBase = (path: string) => `${import.meta.env.BASE_URL}${path.replace(/^\//, "")}`;
 const leadAction = withBase("/lead.php");
 const privacyUrl = withBase("/privacy/");
+const heroImage = withBase("/assets/rutrans-hero-port-truck.jpeg");
 
 const nav = [
   ["Услуги", "#capabilities"],
@@ -175,15 +176,7 @@ const schema = {
     <section class="hero">
       <div class="site-shell hero-content">
         <div class="hero-copy">
-          <img
-            class="hero-mark"
-            src={withBase("/assets/rutrans-symbol.svg")}
-            alt=""
-            width="230"
-            height="150"
-            loading="eager"
-            decoding="async"
-          />
+          <img class="hero-photo" src={heroImage} alt="Грузовой автомобиль на терминале" loading="eager" decoding="async" />
           <div class="hero-text">
             <p class="hero-subtitle">Транспортная компания,<br />на которую можно положиться</p>
             <p class="lead hero-offer">Получите расчёт стоимости перевозки груза за 15 минут</p>
