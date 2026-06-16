@@ -384,44 +384,48 @@ h3 {
 .hero-copy {
   position: relative;
   min-height: clamp(540px, 52vw, 680px);
-  overflow: hidden;
-  border: 1px solid rgb(255 255 255 / 0.12);
-  border-radius: var(--radius);
-  background: #111;
-  box-shadow: 0 30px 90px rgb(0 0 0 / 0.34);
+  overflow: visible;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
   isolation: isolate;
 }
 
 .hero-copy::before {
   position: absolute;
-  inset: 0;
+  inset: -26px;
   z-index: 1;
   content: "";
   background:
     linear-gradient(180deg, rgb(0 0 0 / 0.12), rgb(0 0 0 / 0.54) 62%, rgb(0 0 0 / 0.78)),
     linear-gradient(90deg, rgb(0 0 0 / 0.68), rgb(0 0 0 / 0.28) 54%, rgb(0 0 0 / 0.18));
+  -webkit-mask-image: radial-gradient(ellipse at center, #000 54%, rgb(0 0 0 / 0.84) 68%, transparent 100%);
+  mask-image: radial-gradient(ellipse at center, #000 54%, rgb(0 0 0 / 0.84) 68%, transparent 100%);
 }
 
 .hero-copy::after {
   position: absolute;
-  inset: 0;
+  inset: -34px;
   z-index: 2;
   pointer-events: none;
   content: "";
-  border: 1px solid rgb(255 255 255 / 0.1);
-  border-radius: inherit;
+  background: radial-gradient(ellipse at center, transparent 50%, rgb(12 12 9 / 0.82) 100%);
+  filter: blur(18px);
 }
 
 .hero-photo {
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
+  inset: -26px;
+  width: calc(100% + 52px);
+  height: calc(100% + 52px);
   max-width: none;
   object-fit: cover;
   object-position: center;
-  filter: saturate(0.92) contrast(1.04) brightness(0.86);
-  transform: scale(1.015);
+  filter: saturate(0.92) contrast(1.04) brightness(0.86) blur(0.2px);
+  -webkit-mask-image: radial-gradient(ellipse at center, #000 52%, rgb(0 0 0 / 0.86) 66%, transparent 100%);
+  mask-image: radial-gradient(ellipse at center, #000 52%, rgb(0 0 0 / 0.86) 66%, transparent 100%);
+  transform: scale(1.01);
 }
 
 .hero-text {
