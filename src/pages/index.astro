@@ -111,6 +111,21 @@ const gallery = [
   }
 ];
 
+const partners = [
+  { src: withBase("/assets/partner-ura-mash.jpeg"), name: "Уралмаш" },
+  { src: withBase("/assets/partner-techservice.jpeg"), name: "Техсервис" },
+  { src: withBase("/assets/partner-evrokara-eurasia.jpeg"), name: "Еврокара Евразия" },
+  { src: withBase("/assets/partner-gv-gold.jpeg"), name: "GV Gold" },
+  { src: withBase("/assets/partner-stroykomplekt.jpeg"), name: "Стройкомплект" },
+  { src: withBase("/assets/partner-dali.jpeg"), name: "Дали" },
+  { src: withBase("/assets/partner-gazprom.jpeg"), name: "Газпром" },
+  { src: withBase("/assets/partner-zolotomash.jpeg"), name: "Золотомаш" },
+  { src: withBase("/assets/partner-lstk-group.jpeg"), name: "LSTK Group" },
+  { src: withBase("/assets/partner-liugong-machinery.jpeg"), name: "LiuGong Машинери" },
+  { src: withBase("/assets/partner-oilteam.jpeg"), name: "Ойлтим" },
+  { src: withBase("/assets/partner-polyus.jpeg"), name: "Полюс" }
+];
+
 const details = [
   ["Полное наименование", company.fullName],
   ["ИНН / ОГРН / КПП", `${company.inn} / ${company.ogrn} / ${company.kpp}`],
@@ -273,31 +288,22 @@ const schema = {
       </div>
     </section>
 
-    <section class="split-section">
-      <div class="site-shell split-grid">
-        <div class="split-copy">
-          <p class="eyebrow">Польза</p>
-          <h2>Ваш груз, наша ответственность</h2>
+    <section class="partners-section" aria-labelledby="partners-title">
+      <div class="site-shell partners-shell">
+        <div class="partners-head">
+          <p class="eyebrow">Партнеры</p>
+          <h2 id="partners-title">Компании, с которыми работает РУТРАНС</h2>
           <p>
-            Задачи решает менеджер: уточняет параметры, подбирает транспорт, считает маршрут и держит связь.
-            При сложной заявке подключаем индивидуальную работу, погрузку, разгрузку и экспедирование.
+            Перевозим технику, оборудование и грузы для промышленных, строительных и добывающих компаний по всей РФ.
           </p>
-          <ul class="check-list">
-            <li>расчет обычно за 15 минут</li>
-            <li>возможна работа 24 часа в сутки по задаче</li>
-            <li>страхование груза</li>
-            <li>свой и привлеченный транспортный парк</li>
-          </ul>
         </div>
-        <img
-          class="split-image"
-          src={withBase("/assets/rutrans-two-backhoe-loaders.jpg")}
-          alt="Два экскаватора-погрузчика на низкорамной платформе"
-          width="1280"
-          height="960"
-          loading="lazy"
-          decoding="async"
-        />
+        <div class="partners-grid" aria-label="Партнеры РУТРАНС">
+          {partners.map((partner) => (
+            <figure class="partner-card">
+              <img src={partner.src} alt={partner.name} width="420" height="210" loading="lazy" decoding="async" />
+            </figure>
+          ))}
+        </div>
       </div>
     </section>
 
