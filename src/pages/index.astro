@@ -9,6 +9,7 @@ const withBase = (path: string) => `${import.meta.env.BASE_URL}${path.replace(/^
 const leadAction = withBase("/lead.php");
 const privacyUrl = withBase("/privacy/");
 const heroImage = withBase("/assets/rutrans-hero-port-truck.png");
+const maxUrl = "https://max.ru/u/f9LHodD0cOKkLtxDDzsN0-8HMsANd_jFsN2iomvx9iqsrGFTTkaW_p06bm8";
 
 const nav = [
   ["Услуги", "#capabilities"],
@@ -18,7 +19,7 @@ const nav = [
 ];
 
 const heroStats = [
-  ["До 100 тонн", "грузоподъемность собственной техники"],
+  ["До 100 тонн", "грузоподъемность"],
   ["Более 30 единиц", "собственной техники"],
   ["15 минут", "среднее время расчета"],
   ["Вся территория РФ", "география перевозок"]
@@ -168,6 +169,7 @@ const schema = {
       <div class="nav-actions">
         <a class="nav-cta" href={`tel:${company.phoneRaw}`}>{company.phonePretty}</a>
         <a class="nav-telegram" href="#request">Telegram</a>
+        <a class="nav-telegram nav-max" href={maxUrl} target="_blank" rel="noreferrer">MAX</a>
       </div>
     </div>
   </header>
