@@ -419,6 +419,7 @@ h3 {
   z-index: 3;
   max-width: 660px;
   padding-top: 0;
+  transform: translateY(clamp(-110px, -7vw, -70px));
   font-family:
     Arial,
     Inter,
@@ -1222,6 +1223,10 @@ h3 {
     width: 100%;
   }
 
+  .hero-text {
+    transform: none;
+  }
+
   .cargo-grid,
   .process-grid,
   .service-card-grid {
@@ -1299,6 +1304,7 @@ h3 {
 
   .hero-text {
     max-width: 100%;
+    transform: none;
   }
 
   h2 {
