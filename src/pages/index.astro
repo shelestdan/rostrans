@@ -14,7 +14,6 @@ const maxUrl = "https://max.ru/u/f9LHodD0cOKkLtxDDzsN0-8HMsANd_jFsN2iomvx9iqsrGF
 const nav = [
   ["Услуги", "#capabilities"],
   ["Парк", "#fleet"],
-  ["Процесс", "#process"],
   ["Заявка", "#request"]
 ];
 
@@ -62,20 +61,11 @@ const serviceCards = [
 ];
 
 const fleet = [
-  ["Тралы", "Для спецтехники, тяжелого оборудования и негабарита."],
-  ["Тенты", "Для закрытой перевозки грузов, которым нужна защита от погоды."],
-  ["Бортовые машины", "Для строительных материалов, металлоконструкций и паллет."],
-  ["Площадки без бортов", "Для крупногабаритных грузов и нестандартной погрузки."],
-  ["Рефрижераторы", "Для грузов с температурными требованиями."]
-];
-
-const process = [
-  ["01", "Заявка", "Клиент передает телефон, имя, маршрут, вес и габариты груза."],
-  ["02", "Уточнение", "Менеджер проверяет детали, способ связи и условия погрузки."],
-  ["03", "Расчет", "Стоимость зависит от маршрута, габаритов, веса и сложности задачи."],
-  ["04", "Машина", "Согласуем дату, тип транспорта, погрузку, разгрузку и экспедирование."],
-  ["05", "Доставка", "Везем груз, сопровождаем задачу и держим связь по маршруту."],
-  ["06", "Документы", "Договор, счет, УПД, ТТН, страхование груза и закрывающие документы."]
+  ["Трал", "Для спецтехники, тяжелого оборудования и негабарита."],
+  ["Тент", "Для закрытой перевозки грузов, которым нужна защита от погоды."],
+  ["Борт", "Для строительных материалов, металлоконструкций и паллет."],
+  ["Площадка", "Для крупногабаритных грузов и нестандартной погрузки."],
+  ["Рефрижератор", "Для грузов с температурными требованиями."]
 ];
 
 const gallery = [
@@ -274,7 +264,6 @@ const schema = {
         <div class="section-head">
           <p class="eyebrow">Услуги</p>
           <h2>Услуги, которые предоставляет ООО «РУТРАНС»</h2>
-          <p>Собираем перевозку под задачу: техника, груз, маршрут, документы и контроль сроков.</p>
         </div>
         <div class="service-card-grid">
           {serviceCards.map(([name, text]) => (
@@ -292,9 +281,6 @@ const schema = {
       <div class="site-shell partners-shell">
         <div class="partners-head">
           <h2 id="partners-title">Наши партнеры</h2>
-          <p>
-            Перевозим технику, оборудование и грузы для промышленных, строительных и добывающих компаний по всей РФ.
-          </p>
         </div>
         <div class="partners-grid" aria-label="Партнеры РУТРАНС">
           {partners.map((partner) => (
@@ -308,8 +294,7 @@ const schema = {
 
     <section class="site-shell section fleet-section" id="fleet">
       <div class="section-head">
-        <p class="eyebrow">Транспорт</p>
-        <h2>Парк под разные типы груза</h2>
+        <h2>Парк нашей техники</h2>
       </div>
       <div class="fleet-grid">
         {fleet.map(([name, text]) => (
@@ -323,8 +308,7 @@ const schema = {
 
     <section class="gallery-section" aria-labelledby="gallery-title">
       <div class="site-shell section-head">
-        <p class="eyebrow">Кейсы</p>
-        <h2 id="gallery-title">Реальные перевозки РУТРАНС</h2>
+        <h2 id="gallery-title">Примеры наших работ</h2>
       </div>
       <div class="gallery-grid">
         {gallery.map((item) => (
@@ -336,64 +320,70 @@ const schema = {
       </div>
     </section>
 
-    <section class="site-shell section process-section" id="process">
-      <div class="section-head">
-        <p class="eyebrow">Процесс</p>
-        <h2>От заявки до документов</h2>
-      </div>
-      <div class="process-grid">
-        {process.map(([step, title, text]) => (
-          <article class="process-card">
-            <span>{step}</span>
-            <h3>{title}</h3>
-            <p>{text}</p>
-          </article>
-        ))}
-      </div>
-    </section>
-
     <section class="site-shell section request-section" id="request">
-      <div class="form-card">
+      <div class="hero-panel request-quick-card">
         <p class="eyebrow">Заявка</p>
-        <h2>Получить расчет перевозки</h2>
-        <p>
-          Для точного расчета укажите телефон, имя, маршрут, габариты и вес груза. Пример: г. Москва - г. Красноярск,
-          оборудование, 12 тонн, нужна погрузка.
-        </p>
-        <form class="lead-form" action={leadAction} method="post" novalidate>
-          <div class="field">
-            <label for="name">Имя</label>
-            <input id="name" name="name" autocomplete="name" required minlength="2" maxlength="80" />
+        <h2>Быстрый расчёт стоимости</h2>
+        <form class="lead-form quick-form" action={leadAction} method="post" novalidate>
+          <input type="hidden" name="name" value="Быстрый расчет" />
+          <div class="quick-field">
+            <label for="request-route">Маршрут</label>
+            <input
+              id="request-route"
+              name="route"
+              required
+              minlength="3"
+              maxlength="180"
+              placeholder="Москва - Красноярск"
+            />
           </div>
-          <div class="field">
-            <label for="phone">Телефон</label>
-            <input id="phone" name="phone" autocomplete="tel" inputmode="tel" required minlength="6" maxlength="30" />
+          <div class="quick-field">
+            <label for="request-cargo">Характер груза, габариты, вес</label>
+            <input
+              id="request-cargo"
+              name="cargo_details"
+              required
+              minlength="5"
+              maxlength="500"
+              placeholder="Погрузчик, 17 тонн, ДхШхВ: 8х3х3,5 м"
+            />
           </div>
-          <div class="field">
-            <label for="company">Компания</label>
-            <input id="company" name="company" autocomplete="organization" maxlength="120" />
+          <div class="quick-field">
+            <label for="request-phone">Имя, телефон или эл. почта</label>
+            <input
+              id="request-phone"
+              name="phone"
+              autocomplete="tel"
+              required
+              minlength="6"
+              maxlength="120"
+              placeholder="Иван, +7 999 000 99 99"
+            />
           </div>
-          <div class="field">
-            <label for="cargo">Маршрут, габариты и вес</label>
-            <textarea id="cargo" name="cargo" required minlength="5" maxlength="1000"></textarea>
-          </div>
-          <label class="consent">
+          <label class="consent quick-consent">
             <input name="consent" value="yes" type="checkbox" required />
-            <span>Согласен на обработку данных из формы для ответа на заявку. <a href={privacyUrl}>Политика</a></span>
+            <span>Согласен на обработку данных. <a href={privacyUrl}>Политика</a></span>
           </label>
           <div class="hidden-field" aria-hidden="true">
-            <label for="website">Сайт</label>
-            <input id="website" name="website" tabindex="-1" autocomplete="off" />
+            <label for="request-website">Сайт</label>
+            <input id="request-website" name="website" tabindex="-1" autocomplete="off" />
           </div>
-          <button class="btn btn-primary" type="submit">Отправить заявку</button>
+          <button class="btn btn-primary" type="submit">Рассчитать</button>
           <p class="form-status" role="status" aria-live="polite"></p>
         </form>
+        <dl class="quick-meta" aria-label="Ключевые показатели">
+          {heroStats.map(([value, label]) => (
+            <div>
+              <dt>{value}</dt>
+              <dd>{label}</dd>
+            </div>
+          ))}
+        </dl>
       </div>
 
       <aside class="details-card" id="details" aria-label="Реквизиты компании">
         <div class="details-head">
-          <p class="eyebrow">Контакты и реквизиты</p>
-          <h2>Связаться с РУТРАНС</h2>
+          <h2>Контакты и реквизиты</h2>
         </div>
         {details.map(([label, value]) => (
           <div class="detail-block">

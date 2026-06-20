@@ -654,12 +654,17 @@ h3 {
 .service-hub .section-head .eyebrow {
   grid-column: 1 / -1;
   margin-bottom: -14px;
+  color: #b59a00;
 }
 
 .service-hub .section-head p:not(.eyebrow) {
   margin-bottom: 0;
   color: var(--muted);
   line-height: 1.55;
+}
+
+.service-hub .section-head h2 {
+  font-size: clamp(1.9rem, 4.35vw, 4.25rem);
 }
 
 .service-card-grid {
@@ -856,7 +861,7 @@ h3 {
 
 .partners-head {
   display: grid;
-  grid-template-columns: minmax(0, 0.9fr) minmax(260px, 0.62fr);
+  grid-template-columns: 1fr;
   gap: 24px;
   align-items: end;
 }
@@ -1028,6 +1033,11 @@ h3 {
   align-items: start;
 }
 
+.request-quick-card {
+  background: var(--dark);
+  color: #fff;
+}
+
 .form-card,
 .details-card {
   border: 1px solid var(--line);
@@ -1146,13 +1156,10 @@ h3 {
 }
 
 .details-head {
-  background: var(--dark);
-  color: #fff;
-  padding: 26px;
-}
-
-.details-head .eyebrow {
-  color: var(--accent-warm);
+  border-bottom: 1px solid var(--line);
+  background: #fff;
+  color: var(--ink);
+  padding: 26px 22px;
 }
 
 .details-head h2 {
