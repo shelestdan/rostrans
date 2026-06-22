@@ -19,3 +19,8 @@
 .details-head h2{color:var(--ink)!important}
 .details-head .eyebrow{display:none!important}
 @media(max-width:680px){.request-quick-card .quick-meta{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+
+/* heading-polish-20260622 */
+.service-hub .section-head .eyebrow{display:none!important}
+.service-hub .section-head h2{color:#b59a00!important}
+.hero-panel>.eyebrow,.hero-panel>div>.eyebrow{display:none!important}
