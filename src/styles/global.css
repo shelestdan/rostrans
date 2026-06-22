@@ -654,7 +654,6 @@ h3 {
 .service-hub .section-head .eyebrow {
   grid-column: 1 / -1;
   margin-bottom: -14px;
-  color: #b59a00;
 }
 
 .service-hub .section-head p:not(.eyebrow) {
@@ -664,6 +663,7 @@ h3 {
 }
 
 .service-hub .section-head h2 {
+  color: #b59a00;
   font-size: clamp(1.9rem, 4.35vw, 4.25rem);
 }
 
