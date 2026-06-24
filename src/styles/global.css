@@ -663,7 +663,7 @@ h3 {
 }
 
 .service-hub .section-head h2 {
-  color: #b59a00;
+  color: var(--ink);
   font-size: clamp(1.9rem, 4.35vw, 4.25rem);
 }
 
